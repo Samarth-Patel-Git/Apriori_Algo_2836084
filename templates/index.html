@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>CIS 550 Course Project Apriori Algo</title>
+    <meta name="description"
+          content="CIS 550 Course Project for Apriori Algo">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="CIS 550 Course Project">
+    <meta property="og:type" content="Project">
+
+</head>
+
+<body>
+
+<div id="card-style" >
+    <div id="form-ui">
+        <form action="/" enctype="multipart/form-data" method="post">
+            <div id="form-body">
+                <div id="welcome-lines">
+                    <div class="w-line-1" style="text-align: center">Hello, Welcome to my final project</div>
+                </div>
+                {% if result and result.error %}
+                    <p class="animate-fade alert alert-primary error">{{ result.error }}</p>
+                {% endif %}
+                <div id="input-area">
+                    <div class="filed-input">
+                        <select name="dropdown-file" class="select-list">
+                            <option value="{{ file_list[0] }}" selected>{{ file_list[0].replace('.csv', '') }}</option>
+                            {% for file in file_list[1:] %}
+                                <option value="{{ file }}">{{ file.replace('.csv', '') }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="divider div-transparent div-arrow-down"></div>
+
+                    <div class="filed-input">
+                        <input type="file" name="file-upload" id="file-upload" class="file-btn">
+                    </div>
+
+                    <div class="minimum_support_wrap">
+                        <label for="minimum_support" class="minimum_support">Minimum Support (between 1 and
+                            1000):</label>
+                        <div class="filed-input">
+                            <input min="1" max="1000" type="number" id="minimum_support" name="minimum_support"
+                                   value="20">
+                        </div>
+                    </div>
+
+                </div>
+                <div id="submit-button-cvr">
+                    <input type="submit" name="submit" value="submit" id="submit-button">
+                </div>
+            </div>
+        </form>
+        <div id="main-box">
+            <div class="main-box-wrap">
+                {% if result %}
+                    <div id="result-wrap">
+                        <div class="content">
+                            <div class="card">
+                                <div class="firstinfo">
+                                    <div class="profileinfo">
+                                        <h1 class="w-line-1 total-title" style="margin: 0; text-align: center" >APRIORI ALGORITHM</h1>
+                                        <div class="animate-fade">
+                                            <p style="margin: 0; text-align: center"><span class="bold">File:</span> {{ result.file }} </p>
+                                            <p style="margin: 0; text-align: center"><span class="bold">Total:</span> {{ result.total }} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="result">
+                            <p class="w-line-2 result-title">{{ result.result }}</p>
+                        </div>
+
+                    </div>
+                {% else %}
+                    <div class="my-details">
+                        <p>Please select file </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static',filename='js/vendor/modernizr-3.11.2.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/plugins.js') }}"></script>
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+</body>
+
+</html>
